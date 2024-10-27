@@ -16,7 +16,7 @@ function PersonalDeatails({enableNext}) {
     const [formData, setFormData] = useState();
     const [loading,setLoading] = useState(false);
     useEffect(() => {
-        console.log("Params", params);
+        // console.log("Params", params);
     },[])
 
     const handleChange = (e) => {
@@ -41,7 +41,7 @@ function PersonalDeatails({enableNext}) {
             data: formData
         }
         GlobalApi.UpdateResumeDetail(params?.resumeId,data).then(res => {
-            console.log(res);
+            // console.log(res);
             enableNext(true);
             setLoading(false);
             toast("Details updated successfully");

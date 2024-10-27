@@ -10,45 +10,42 @@ import { toast } from 'sonner';
 function Summary({enableNext}) {
 
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
-    const [summary, setSummary] = useState();
+    const [summary, setSummary] = useState("");
     const [loading, setLoading] = useState(false);
     const params = useParams();
 
-
-
     // When summary changes
-
     useEffect(() => {
         setResumeInfo({
             ...resumeInfo,
-            summery: summary
-        }, [summary])
-
-    })
+            summery: summary,
+        });
+    }, [summary]);  // Only run this effect when 'summary' changes
 
     const onSave = (e) => {
         setLoading(true);
         e.preventDefault();
         const data = {
-            summery: summary
-        }
+            data: {
+                summery: summary,
+            }
+        };
         GlobalApi.UpdateResumeDetail(params?.resumeId, data).then(res => {
-            console.log(res);
+            // console.log(res);
             enableNext(true);
             setLoading(false);
-            toast("Summary Added Sucessfully");
-        }, (error) => {
+            toast("Summary Added Successfully");
+        }).catch((error) => {
             console.log(error);
             setLoading(false);
-        })
-    }
+        });
+    };
 
     return (
         <div>
             <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
                 <h2 className='font-bold text-lg'>Summary</h2>
-                <p>Add an informative summary to your Resume </p>
-
+                <p>Add an informative summary to your Resume</p>
 
                 <form className='mt-7' onSubmit={onSave}>
                     <div className='flex justify-between items-end'>
@@ -65,17 +62,15 @@ function Summary({enableNext}) {
 
                     <div className='mt-2 flex justify-end'>
                         <Button 
-                       type="submit"
-                       disabled = {loading}>
-                           {loading?<LoaderCircle className='animate-spin'/>:"Save"}
+                            type="submit"
+                            disabled={loading}>
+                            {loading ? <LoaderCircle className='animate-spin' /> : "Save"}
                         </Button>
                     </div>
                 </form>
             </div>
         </div>
-    )
+    );
 }
 
-export default Summary
-
-
+export default Summary;
