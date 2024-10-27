@@ -15,12 +15,14 @@ import { Input } from '@/components/ui/input';
 import GlobalApi from './../../../service/GlobalApi';
 import { useUser } from '@clerk/clerk-react';
 import { X } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
 function AddResume() {
     const [openDialog, setOpenDialog] = useState(false);
     const [resumeTitle, setResumeTitle] = useState('');
     const { user } = useUser();
     const [loading, setLoading] = useState(false);
+    const navigation = useNavigate();
 
     const OnCreate = async () => {
         setLoading(true);
@@ -38,7 +40,8 @@ function AddResume() {
 
         try {
             const res = await GlobalApi.CreateNewResume(data);
-            console.log(res);
+            console.log(res.data.data.documentId);
+            navigation('/dashboard/resume/'+res.data.data.documentId+"/edit");
         } catch (err) {
             console.error(err);
         } finally {

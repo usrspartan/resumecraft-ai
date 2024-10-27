@@ -10,8 +10,22 @@ const axiosClient = axios.create({
     }
 });
 
-const CreateNewResume = (data) => axiosClient.post('/user-resumes', data);
+const CreateNewResume = (data) => {
+    console.log("Data posted::", + data);
+    return axiosClient.post('/user-resumes', data);
+}
+
+const GetUsersResumes = (userEmail) => {
+    return axiosClient.get('/user-resumes');   
+}
+
+const UpdateResumeDetail = (id,data) => axiosClient.put('/user-resumes/'+id, data);
+
+
+
 
 export default {
-    CreateNewResume
+    CreateNewResume,
+    GetUsersResumes,
+    UpdateResumeDetail
 };
