@@ -3,12 +3,10 @@ import { Textarea } from '@/components/ui/textarea'
 import { ResumeInfoContext } from '@/context/ResumeInfoContext';
 import { LoaderCircle, SparklesIcon } from 'lucide-react';
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { json, useParams } from 'react-router-dom';
 import GlobalApi from './../../../../../service/GlobalApi';
 import { toast } from 'sonner';
 import { AIchatSession } from '../../../../../service/AiModal';
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
 
 
 function Summary({ enableNext }) {
@@ -19,9 +17,9 @@ function Summary({ enableNext }) {
     const params = useParams();
 
     // For Gemini API
-    const prompt = "Job Title = {jobTitle} , Depends on job title give me summary for my resume within 4-5 lines do not use any placeholders";
+    const prompt = "Job Title = {jobTitle}, Depending upon the job title given, generate a summary in 4-5 lines for my resume in json format with fields experience and summary having experience level of fresher, mid-level, and experienced. Without any non whitespace characters usage";
 
-
+    const [aiGeneratedSummaryList, setAiGeneratedSummaryList] = useState();
 
     // When summary changes
     useEffect(() => {
@@ -40,8 +38,15 @@ function Summary({ enableNext }) {
 
 
         const result = await AIchatSession.sendMessage(PROMPT);
-        console.log("Result of prompt", result.response.text());
+        const rawString = result.response.text();
+        const jsonString = `[${rawString}]`;
+        console.log(JSON.parse(jsonString));
+        setAiGeneratedSummaryList(JSON.parse(jsonString));  // Set the AI generated summary list
         setLoading(false);
+    }
+
+    const summaryClick = (e) => {   
+        setSummary(e.target.innerText);
     }
 
 
@@ -92,6 +97,18 @@ function Summary({ enableNext }) {
                     </div>
                 </form>
             </div>
+
+            {aiGeneratedSummaryList && (
+                <div>
+                    <h2 className='text-center mt-5 font-semibold shadow-md'>Need Suggestions?</h2>
+                    {aiGeneratedSummaryList.map((item, index) => (
+                        <div key={index}>
+                            <h2 className='mt-5 font-medium '>Level: {item?.experience}</h2>
+                            <p className='font-serif cursor-grab' onClick={summaryClick}>{item?.summary}</p>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
