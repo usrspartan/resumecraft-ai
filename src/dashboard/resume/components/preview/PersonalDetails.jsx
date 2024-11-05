@@ -23,11 +23,11 @@ function PersonalDetails({ resumeInfo }) {
                     style={{
                         color: resumeInfo?.themeColor
                     }}
-                ><PhoneIcon size="20px" />{resumeInfo?.phone}</h2>
+                ><PhoneIcon size="20px"/>{resumeInfo?.phone}</h2>
                 <h2 className='font-normal text-xs flex justify-between gap-2'
                     style={{
                         color: resumeInfo?.themeColor
-                    }}><MailIcon size="20px" />
+                    }}><MailIcon size="20px"/>
                         {resumeInfo?.email}</h2>
             </div>
 

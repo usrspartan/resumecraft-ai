@@ -17,7 +17,7 @@ function Summary({ enableNext }) {
     const params = useParams();
 
     // For Gemini API
-    const prompt = "Job Title = {jobTitle}, Depending upon the job title given, generate a summary in 4-5 lines for my resume in json format with fields experience and summary having experience level of fresher, mid-level, and experienced. Without any non whitespace characters usage";
+    const prompt = "Job Title = {jobTitle}, Depending upon the job title given, generate 3 summaies of 4-5 lines each for my resume in json format with fields experience and summary having experience level of fresher, mid-level, and experienced. Without any placeholders, just the summary.";
 
     const [aiGeneratedSummaryList, setAiGeneratedSummaryList] = useState();
 
@@ -34,16 +34,28 @@ function Summary({ enableNext }) {
     const GenerateSummaryFromAI = async () => {
         setLoading(true);
         const PROMPT = prompt.replace("{jobTitle}", resumeInfo?.jobTitle);
-        console.log("Prompt", PROMPT);
-
-
-        const result = await AIchatSession.sendMessage(PROMPT);
-        const rawString = result.response.text();
-        const jsonString = `[${rawString}]`;
-        console.log(JSON.parse(jsonString));
-        setAiGeneratedSummaryList(JSON.parse(jsonString));  // Set the AI generated summary list
-        setLoading(false);
-    }
+        console.log("Prompt:", PROMPT);
+    
+        try {
+            const result = await AIchatSession.sendMessage(PROMPT);
+            const rawString = await result.response.text();
+    
+            // Wrap the response in brackets to make it a valid JSON array if necessary
+            const jsonString = `[${rawString}]`;
+            const parsedData = JSON.parse(jsonString);
+    
+            // Since parsedData is already structured as needed, we can directly set it
+            setAiGeneratedSummaryList(parsedData);
+            console.log("AI Generated Summary List:", parsedData);
+    
+        } catch (error) {
+            console.error("Error parsing JSON response:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    
+    
 
     const summaryClick = (e) => {   
         setSummary(e.target.innerText);
