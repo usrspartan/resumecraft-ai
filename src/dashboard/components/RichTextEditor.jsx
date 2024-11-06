@@ -18,7 +18,7 @@ import {
 } from 'react-simple-wysiwyg';
 import { AIchatSession } from '../../../service/AiModal';
 import { toast } from 'sonner';
-const prompt ="Job title={positionTitle}. On the basis of the Job title, generate a summary in html format having 5-7 bullet points to add in the experience section in my resume. Do not use any placeholders.";   
+const prompt ="Job title={positionTitle}. On the basis of the Job title, generate only one summary in html format having 5-7 bullet points to add in the experience section in my resume. Do not use any placeholders. Use the json field=summary";   
 
 function RichTextEditor({ onRichTextEditorChange, index }) {
 
@@ -40,8 +40,8 @@ function RichTextEditor({ onRichTextEditorChange, index }) {
         console.log("Prompt:", PROMPT);
         console.log("Result:", result.response.text());
         const res = JSON.parse(result.response.text());
-        console.log("Res:", res?.experience_summary);
-        setValue(res?.experience_summary);
+        console.log("Res:", res?.summary);
+        setValue(res?.summary);
         setLoading(false);
     }
 
