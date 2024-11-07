@@ -8,7 +8,7 @@ function PersonalDetails({ resumeInfo }) {
         <div>
             <h2 className='font-bold text-xl text-center' style={{
                 color: resumeInfo?.themeColor
-            }}>{resumeInfo?.firstName}  {resumeInfo?.lastName}</h2>
+            }}>{resumeInfo?.firstName}   {resumeInfo?.lastName}</h2>
             <h2 className='text-center text-sm font-medium'
             >{resumeInfo?.jobTitle}</h2>
 

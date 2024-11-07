@@ -65,7 +65,7 @@ function EducationForm({ enableNext }) {
         setLoading(true)
         const data = {
             data: {
-                education: EducationList
+                education: EducationList.map(({ id, ...rest }) => rest)
             }
         }
 

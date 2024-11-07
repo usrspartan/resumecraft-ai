@@ -96,6 +96,7 @@ function Summary({ enableNext }) {
                     <Textarea
                         placeholder="Your Summary here" required
                         className='mt-5'
+                        defaultValue={resumeInfo?.summery}
                         value={summary}
                         onChange={(e) => setSummary(e.target.value)}
                     />

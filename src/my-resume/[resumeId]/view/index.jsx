@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import GlobalApi from './../../../../service/GlobalApi';
 import { RWebShare } from 'react-web-share';
+import { data } from 'autoprefixer';
 
 function ViewResume() {
 
@@ -17,17 +18,30 @@ function ViewResume() {
     }, [])
 
 
+    // const GetResumeInfo = () => {
+    //     GlobalApi.GetResumeById(resumeId).then(res => {
+    //         console.log("API response",res.data.data);
+    //         setResumeInfo(res.data.data);
+    //     })
+    // }
+
     const GetResumeInfo = () => {
         GlobalApi.GetResumeById(resumeId).then(res => {
-            console.log("API response",res.data.data);
-            setResumeInfo(res.data.data);
-        })
-    }
+            const data = res.data.data;
+            setResumeInfo({
+                ...data,
+                // themeColor: data.themeColor || '#FF5733' // Default color if none is set
+                themeColor: res.data.data.themeColor || '#FF5733'               
+            });
+        });
+    };
 
 
     const HandleDownload = () => {
         window.print();
     }
+
+    
 
 
     return (
