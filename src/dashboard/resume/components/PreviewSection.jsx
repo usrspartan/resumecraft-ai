@@ -8,7 +8,7 @@ import Skills from './preview/Skills';
 
 function PreviewSection() {
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
-
+    console.log('resumeInfo preview section', resumeInfo);
     return (
         <div className='shadow-lg h-full p-14 border-t-[20px]'
             style={{

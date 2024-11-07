@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { ResumeInfoContext } from '@/context/ResumeInfoContext';
-import { LoaderCircle, LoaderPinwheel, Sparkles } from 'lucide-react';
+import { LoaderCircle, Sparkles } from 'lucide-react';
 import React, { useContext } from 'react'
 import { useState } from 'react';
 import {

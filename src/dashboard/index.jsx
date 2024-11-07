@@ -31,7 +31,7 @@ const GetResumesList = () => {
         <AddResume/>
 
         {resumeList.length>0&&resumeList.map((resume,index) => (
-          <ResumeItem resume = {resume} key={index}/>
+          <ResumeItem resume = {resume} key={index} refreshData={GetResumesList}/>
         ))}
       </div>
     </div>

@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 
 function SkillsForm({ enableNext }) {
   const [loading, setLoading] = useState(false);
-  const {resumeInfo, setResumeInfo} = useContext(ResumeInfoContext);
+  const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
 
   const [skillList, setSkillList] = useState([
     {
@@ -22,7 +22,11 @@ function SkillsForm({ enableNext }) {
     }
   ]);
 
-const {resumeId}=useParams();
+  const { resumeId } = useParams();
+
+  useEffect(() => {
+    resumeInfo && setSkillList(resumeInfo?.skills)
+  }, [])
 
   const handleChange = (index, name, value) => {
     const newEntries = skillList.slice();
@@ -34,17 +38,17 @@ const {resumeId}=useParams();
   const onSave = () => {
     setLoading(true);
 
-    const data={
-      data:{
-        skills: skillList
+    const data = {
+      data: {
+        skills: skillList.map(({ id, ...rest }) => rest)
       }
     }
 
-    GlobalApi.UpdateResumeDetail(resumeId,data).then((res)=>{
+    GlobalApi.UpdateResumeDetail(resumeId, data).then((res) => {
       console.log(res);
       setLoading(false);
       toast("Skills Updated");
-    },(error)=>{
+    }, (error) => {
       setLoading(false);
       toast("Server Error")
     })
@@ -88,11 +92,14 @@ const {resumeId}=useParams();
               <div>
                 <label className='text-xs'>Name</label>
                 <Input
+                  defaultValue={item?.name}
                   onChange={(e) => handleChange(index, 'name', e.target.value)}
                 />
               </div>
 
-              <Rating style={{ maxWidth: 120 }} value={item.rating} onChange={(v) => handleChange(index, 'rating', v)} />
+              <Rating style={{ maxWidth: 120 }} value={item.rating} 
+              defaultValue={item?.rating}
+              onChange={(v) => handleChange(index, 'rating', v)} />
             </div>
           ))}
         </div>

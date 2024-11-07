@@ -4,16 +4,28 @@ import FormSection from '../../components/FormSection';
 import PreviewSection from '../../components/PreviewSection';
 import { ResumeInfoContext } from '@/context/ResumeInfoContext';
 import dummy from '@/data/dummy';
+import GlobalApi from './../../../../../service/GlobalApi';
 
 function EditResume() {
-  console.log("Dummy data", dummy);
+
+  const {resumeId} = useParams();
+
+  // console.log("Dummy data", dummy);
   const params = useParams();
   const [resumeInfo, setResumeInfo] = useState();
   useEffect(() => {
-    setResumeInfo(dummy);
+    GetResumeInfo();
   },
 
     [params]);
+
+
+    const GetResumeInfo=()=>{
+      GlobalApi.GetResumeById(resumeId).then(res=>{
+        console.log(res.data.data);
+        setResumeInfo(res.data.data);
+      })
+    }
 
 
   return (

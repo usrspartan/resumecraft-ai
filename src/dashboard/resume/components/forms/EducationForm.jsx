@@ -22,6 +22,10 @@ function EducationForm({ enableNext }) {
         }
     ]);
 
+    useEffect(()=>{
+        resumeInfo&&setEducationList(resumeInfo?.education)
+    },[])
+
     const addNewEducation = () => {
         setEducationList([...EducationList, {
             universityName: '',
@@ -76,6 +80,8 @@ function EducationForm({ enableNext }) {
 
     }
 
+
+
     return (
         <div>
             <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
@@ -93,6 +99,7 @@ function EducationForm({ enableNext }) {
                                     type="text"
                                     name='universityName'
                                     value={education.universityName}
+                                    defaultValue={education?.universityName}
                                     onChange={(e) => handleInputChange(index, e)}
                                     className='border w-[100%] h-[35px]'
                                 />
@@ -104,6 +111,7 @@ function EducationForm({ enableNext }) {
                                     type="text"
                                     name='degree'
                                     value={education.degree}
+                                    defaultValue={education?.degree}
                                     onChange={(e) => handleInputChange(index, e)}
                                     className='border w-[100%] h-[35px]'
                                 />
@@ -115,6 +123,7 @@ function EducationForm({ enableNext }) {
                                     type="text"
                                     name='major'
                                     value={education.major}
+                                    defaultValue={education?.major}
                                     onChange={(e) => handleInputChange(index, e)}
                                     className='border w-[100%] h-[35px]'
                                 />
@@ -126,6 +135,7 @@ function EducationForm({ enableNext }) {
                                     type="date"
                                     name='startDate'
                                     value={education.startDate}
+                                    defaultValue={education?.startDate}
                                     onChange={(e) => handleInputChange(index, e)}
                                     className='border w-[100%] h-[35px]'
                                 />
@@ -137,6 +147,7 @@ function EducationForm({ enableNext }) {
                                     type="date"
                                     name='endDate'
                                     value={education.endDate}
+                                    defaultValue={education?.endDate}
                                     onChange={(e) => handleInputChange(index, e)}
                                     className='border w-[100%] h-[35px]'
                                 />
@@ -147,6 +158,7 @@ function EducationForm({ enableNext }) {
                                 <textarea
                                     name='description'
                                     value={education.description}
+                                    defaultValue={education?.description}
                                     onChange={(e) => handleInputChange(index, e)}
                                     className='border w-[100%]'
                                 />
