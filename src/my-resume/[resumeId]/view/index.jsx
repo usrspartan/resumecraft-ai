@@ -31,7 +31,7 @@ function ViewResume() {
             setResumeInfo({
                 ...data,
                 // themeColor: data.themeColor || '#FF5733' // Default color if none is set
-                themeColor: res.data.data.themeColor || '#FF5733'               
+                themeColor: res.data.data.themeColor || "#B48EAD"               
             });
         });
     };

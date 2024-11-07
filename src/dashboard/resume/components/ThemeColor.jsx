@@ -12,11 +12,12 @@ import { ResumeInfoContext } from '@/context/ResumeInfoContext';
 
 function ThemeColor() {
     const colors = [
-        "#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#A133FF",
-        "#33FFF5", "#FF8C33", "#8CFF33", "#338CFF", "#FF338C",
-        "#8C33FF", "#33FF8C", "#FF5733", "#33FF57", "#3357FF",
-        "#FF33A1", "#A133FF", "#33FFF5", "#FF8C33", "#8CFF33"
+        "#3B4252", "#4C566A", "#D08770", "#A3BE8C", "#EBCB8B",
+        "#5E81AC", "#B48EAD", "#81A1C1", "#88C0D0", "#BF616A",
+        "#ECEFF4", "#2E3440", "#D8DEE9", "#434C5E", "#A8A9AD",
+        "#718093", "#596275", "#F2D7EE", "#FFC107", "#F08080"
     ];
+    
 
     const {resumeInfo, setResumeInfo} = useContext(ResumeInfoContext);
 
