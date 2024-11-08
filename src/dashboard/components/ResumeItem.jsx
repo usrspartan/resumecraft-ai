@@ -1,4 +1,4 @@
-import { LoaderCircle, MoreVertical } from 'lucide-react';
+import { LoaderCircle, LoaderIcon, MoreVertical } from 'lucide-react';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -40,29 +40,31 @@ function ResumeItem({ resume, refreshData }) {
             refreshData();
             setLoading(false);
             setOpenAlert(false);
-        },(error)=>{
+        }, (error) => {
             setLoading(false);
         })
     }
-
+    
     return (
-        <div>
+        <div className=' hover:scale-105 transition-all'>
             <Link to={'/dashboard/resume/' + resume.documentId + "/edit"}>
                 <div className='p-14 bg-secondary flex items-center justify-center
              h-[280px] border-dashed border-primary rounded-lg 
             hover:scale-105 transition-all hover:shadow-md shadow-primary
             bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500'
                     style={{
-                        borderColor: resume?.themeColor
+                        // borderColor: resume?.themeColor
+                        borderColor: 'linear-gradient(90deg, #FF5733 0%, #FFC300 100%)'
                     }}>
                     <div className='flex items-center justify-center h-[180px]'>
                         <img src='/resume.png' className='w-[80px] h-[80px]' />
                     </div>
                 </div>
             </Link>
-            <div className='border p-3 flex justify-between text-white'
+            <div className='border p-3 flex justify-between text-white rounded-b-lg shadow-lg'
                 style={{
-                    backgroundColor: "orange"
+                    // background: resume?.themeColor
+                    background: 'linear-gradient(90deg, #FF5733 0%, #FFC300 100%)'
                 }}>
                 <h2 className='text-sm'>{resume?.title}</h2>
 
@@ -90,10 +92,7 @@ function ResumeItem({ resume, refreshData }) {
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                             <AlertDialogCancel onClick={() => setOpenAlert(false)} >Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={onDelete}
-                            disabled={loading}
-                            >
-                                
+                            <AlertDialogAction onClick={onDelete} disabled={loading}>
                                 {loading ? <LoaderCircle className='animate-spin' /> : 'Delete'}
                             </AlertDialogAction>
                         </AlertDialogFooter>
@@ -103,7 +102,6 @@ function ResumeItem({ resume, refreshData }) {
 
             </div>
         </div>
-
     )
 }
 

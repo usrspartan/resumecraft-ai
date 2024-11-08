@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import {
     Popover,
     PopoverContent,
@@ -7,6 +7,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { LayoutGrid } from 'lucide-react';
 import { ResumeInfoContext } from '@/context/ResumeInfoContext';
+import GlobalApi from './../../../../service/GlobalApi';
+import { useParams } from 'react-router-dom';
+import { toast } from 'sonner';
 
 
 
@@ -20,11 +23,23 @@ function ThemeColor() {
     
 
     const {resumeInfo, setResumeInfo} = useContext(ResumeInfoContext);
-
+    const {resumeId} = useParams();
+    const [selectedColor, setSelectedColor] = useState();
     const ChangeThemeColor = (color) => {
+       setSelectedColor(color);
+       
         setResumeInfo({
             ...resumeInfo,
             themeColor: color
+        })
+        const data={
+            data:{
+                themeColor:color
+            }
+        }
+        GlobalApi.UpdateResumeDetail(resumeId,data).then(res=>{
+            console.log(res);
+            toast("Theme Color Updated Successfully");
         })
     }
     console.log('resumeInfo in color section', resumeInfo);
@@ -40,7 +55,9 @@ function ThemeColor() {
                         {colors.map((item, index) => (
                             <div key={index} 
                             onClick={() => ChangeThemeColor(item)}
-                            className='h-5 w-5 rounded-full cursor-pointer hover:border-black border'
+                            className={`h-5 w-5 rounded-full cursor-pointer hover:border-black border
+                                ${selectedColor?.themeColor==item&&'border-black'}
+                                `}
                                 style={{
                                     background: item
                                 }}

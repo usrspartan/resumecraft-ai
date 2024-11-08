@@ -3,7 +3,7 @@ import React from 'react'
 function Summary({resumeInfo}) {
   return (
     <div>
-        <p className='text-xs'>
+        <p className='text-sm'>
             {resumeInfo?.summery}
         </p>
     </div>

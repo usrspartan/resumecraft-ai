@@ -31,7 +31,7 @@ function Experience({resumeInfo}) {
                     {exp?.workSummery}
                 </p> */}
 
-                <div dangerouslySetInnerHTML={{__html:exp?.workSummery}} />
+                <div className='text-sm' dangerouslySetInnerHTML={{__html:exp?.workSummery}} />
             </div>
         ))    
         }

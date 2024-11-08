@@ -22,7 +22,7 @@ const GetResumesList = () => {
     setResumeList(res.data.data);
   })
 }
-
+console.log("Resumes list::",resumeList);
   return (
     <div className='p-10 md:px-20 lg:px-32'>
       <h2 className='font-bold text-3xl'>My Resume</h2>

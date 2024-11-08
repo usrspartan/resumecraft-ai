@@ -12,7 +12,7 @@ import { AIchatSession } from '../../../../../service/AiModal';
 function Summary({ enableNext }) {
 
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
-    const [summary, setSummary] = useState("");
+    const [summary, setSummary] = useState(resumeInfo?.summery || '');
     const [loading, setLoading] = useState(false);
     const params = useParams();
 
@@ -80,7 +80,7 @@ function Summary({ enableNext }) {
             setLoading(false);
         });
     };
-
+console.log('resumeInfo summary', resumeInfo);
     return (
         <div>
             <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
