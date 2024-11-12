@@ -1,14 +1,19 @@
-import React from 'react'
-import { Button } from '../ui/button'
-import { Link } from 'react-router-dom'
-import { UserButton, useUser } from '@clerk/clerk-react'
+import React from 'react';
+import { Button } from '../ui/button';
+import { Link } from 'react-router-dom';
+import { UserButton, useUser } from '@clerk/clerk-react';
 
 function Header() {
   const { user, isSignedIn } = useUser();
 
   return (
     <div className='p-3 px-5 flex justify-between shadow-md'>
-      <img src='/logo.svg' width={50} height={50} />
+      <div className='flex'>
+        <Link to='/'>
+          <img src='/logo.svg' width={50} height={50} alt='Logo' />
+        </Link>
+        <h2 className='pt-3 pl-2 text-primary font-bold'>ResumeCraft-AI</h2>
+      </div>
 
       {isSignedIn ? (
         <div className='flex items-center'>
@@ -23,7 +28,7 @@ function Header() {
         </Link>
       )}
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;

@@ -19,6 +19,8 @@ const GetUsersResumes = (userEmail) => {
     return axiosClient.get('/user-resumes');   
 }
 
+// const GetUsersResumes=(userEmail)=>axiosClient.get('/user-resumes?filters[userEmail][$eq]='+userEmail);
+
 const UpdateResumeDetail = (id,data) => axiosClient.put('/user-resumes/'+id, data);
 
 

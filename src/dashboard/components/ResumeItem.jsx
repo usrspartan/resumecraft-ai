@@ -50,7 +50,7 @@ function ResumeItem({ resume, refreshData }) {
             <Link to={'/dashboard/resume/' + resume.documentId + "/edit"}>
                 <div className='p-14 bg-secondary flex items-center justify-center
              h-[280px] border-dashed border-primary rounded-lg 
-            hover:scale-105 transition-all hover:shadow-md shadow-primary
+         hover:shadow-md shadow-primary
             bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500'
                     style={{
                         // borderColor: resume?.themeColor

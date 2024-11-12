@@ -25,28 +25,52 @@ function AddResume() {
     const navigation = useNavigate();
 
     const OnCreate = async () => {
-        setLoading(true);
-        const uuid = uuidv4();
-        const data = {
-            data: {
-                title: resumeTitle,
-                resumeid: uuid,
-                userEmail: user?.primaryEmailAddress?.emailAddress,
-                userName: user?.fullName
+        // setLoading(true);
+        // const uuid = uuidv4();
+        // const data = {
+        //     data: {
+        //         title: resumeTitle,
+        //         resumeid: uuid,
+        //         userEmail: user?.primaryEmailAddress?.emailAddress,
+        //         userName: user?.fullName
+        //     }
+        // };
+
+        // console.log('Payload:', data); // Log the payload
+
+        // try {
+        //     const res = await GlobalApi.CreateNewResume(data);
+        //     console.log(res.data.data.documentId);
+        //     navigation('/dashboard/resume/'+res.data.data.documentId+"/edit");
+        // } catch (err) {
+        //     console.error(err);
+        // } finally {
+        //     setLoading(false);
+        // }
+
+
+        setLoading(true)
+        const uuid=uuidv4();
+        const data={
+            data:{
+                title:resumeTitle,
+                resumeId:uuid,
+                userEmail:user?.primaryEmailAddress?.emailAddress,
+                userName:user?.fullName
             }
-        };
-
-        console.log('Payload:', data); // Log the payload
-
-        try {
-            const res = await GlobalApi.CreateNewResume(data);
-            console.log(res.data.data.documentId);
-            navigation('/dashboard/resume/'+res.data.data.documentId+"/edit");
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
         }
+
+        GlobalApi.CreateNewResume(data).then(resp=>{
+            console.log(resp.data.data.documentId);
+            if(resp)
+            {
+                setLoading(false);
+                navigation('/dashboard/resume/'+resp.data.data.documentId+"/edit");
+            }
+        },(error)=>{
+            setLoading(false);
+        })
+
     };
 
     return (
